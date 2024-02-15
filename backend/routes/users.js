@@ -14,7 +14,8 @@ router.post('/signup', (req, res) => {
   }
 
   // Check if the user has not already been registered
-  User.findOne({ username: req.body.username }).then(user => {
+  //i need to compare password hash to see if he already is in the database
+  User.findOne({username: req.body.username}).then(user => {
     if (!user) {
       const hash = bcrypt.hashSync(req.body.password, 10);
       const token = uid2(32)
@@ -42,7 +43,7 @@ router.post('/signin', (req, res) => {
     res.json({ result: false, error: 'Missing or empty fields' });
     return;
   }
-      
+
   User.findOne({ username: req.body.username }).then(user => {
     if (user && bcrypt.compareSync(req.body.password, user.password)) {
       res.json({ result: true, user });
