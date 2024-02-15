@@ -2,10 +2,14 @@ import React from "react";
 import styles from '../styles/Signin.module.css';
 import { useState } from "react";
 import { useRouter } from 'next/router'
+import { useDispatch } from "react-redux";
+import { login } from "../reducers/users";
 
 
 const Signin = (props) => {
 
+    const dispatch = useDispatch();
+    
     const [signin_username, setsignin_username] = useState('');
     const [signin_password, setsignin_password] = useState('');
     
@@ -16,13 +20,7 @@ const Signin = (props) => {
     }
 
 
-
     //fake database
-    const fake_db = {
-        username: 'yaya',
-        password: 'yaya',
-    }
-
     const handleSignin = async (event) => {
         event.preventDefault();
            
@@ -37,6 +35,7 @@ const Signin = (props) => {
         const user_data = await fetching_data.json();
 
         if(user_data.result){
+            dispatch(login({username: user_data.user.username, firstname: user_data.user.firstname, token: user_data.user.token}))
             router.push('/home_main');
         }else {
             console.log('not good at all')

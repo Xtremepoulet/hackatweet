@@ -3,9 +3,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import styles from '../styles/Home_main.module.css';
 import Tweet from "./Tweet";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../reducers/users";
+import { useRouter } from 'next/router';
 
 
 const Home_main = () => {
+
+    const dispatch = useDispatch();
+    const router = useRouter();
+
+    const username = useSelector((state) => state.users.value.username);
+    const firstname = useSelector((state) => state.users.value.firstname);
+
+    const handleLogout = () => {
+        dispatch(logout());
+        router.push('/');
+    } 
+
     return(
         <div className={styles.main_container}>
             {/* left section  */}
@@ -18,12 +33,12 @@ const Home_main = () => {
                         <FontAwesomeIcon className={styles.user_icon} icon={faUser} />
                     </div>
                     <div className={styles.left_section_user_infos}>
-                        <p className={styles.user_infos_p}>FirstName</p>
-                        <p className={styles.user_infos_username}>@username</p>
+                        <p className={styles.user_infos_p}>{firstname}</p>
+                        <p className={styles.user_infos_username}>@{username}</p>
                     </div>
                 </div>
                 <div className={styles.left_section_bottom}>
-                    <button className={styles.logout_button}>LOGOUT</button>
+                    <button onClick={() => handleLogout()}  className={styles.logout_button}>LOGOUT</button>
                 </div>
             </div>
 

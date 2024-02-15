@@ -23,11 +23,10 @@ router.post('/signup', (req, res) => {
         username: req.body.username,
         password: hash,
         token,
-
       });
 
-      newUser.save().then(newDoc => {
-        res.json({ result: true, token: newDoc.token });
+      newUser.save().then(user_data => {
+        res.json({ result: true, user_data });
       });
     } else {
       // User already exists in database
@@ -43,15 +42,27 @@ router.post('/signin', (req, res) => {
     res.json({ result: false, error: 'Missing or empty fields' });
     return;
   }
-
+      
   User.findOne({ username: req.body.username }).then(user => {
     if (user && bcrypt.compareSync(req.body.password, user.password)) {
-      res.json({ result: true, token: user.token });
+      res.json({ result: true, user });
     } else {
       res.json({ result: false, error: 'User not found or wrong password' });
     }
   });
 });
 
+
+
+
+router.get('/isConnected/:token', (req, res) => {
+  User.findOne({ token: req.params.token }).then(data => {
+    if (data) {
+      res.json({ result: true });
+    } else {
+      res.json({ result: false, error: 'User not found' });
+    }
+  });
+});
 
 module.exports = router;

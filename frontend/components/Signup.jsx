@@ -1,10 +1,14 @@
 import React from "react";
 import styles from '../styles/Signup.module.css';
 import { useState } from "react";
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
+import { useDispatch } from "react-redux";
+import { login } from "../reducers/users";
 
     
 const Signup = (props) => {
+
+    const dispatch = useDispatch();
 
     const [signup_firstname, setsignup_firstname] = useState('');
     const [signup_username, setsignup_username] = useState('');
@@ -31,7 +35,8 @@ const Signup = (props) => {
         const user_data = await fetching_data.json();
 
         if(user_data.result){
-            router.push('/home_main')
+            dispatch(login({token: user_data.user_data.token, username: user_data.user_data.username, firstname: user_data.user_data.firstname}));
+            router.push('/home_main');
         }
     }
 
