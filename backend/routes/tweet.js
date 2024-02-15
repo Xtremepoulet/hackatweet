@@ -10,8 +10,7 @@ function createTweet(firstname, usernameId, date, message, likeCount) {
         username: usernameId,
         date: date,
         message: message,
-        likeCount: likeCount,
-
+        likeCount: likeCount,                                       
     });
 
     newTweet.save().then(() => {

@@ -36,6 +36,8 @@ router.post('/signup', (req, res) => {
   });
 });
 
+
+
 router.post('/signin', (req, res) => {
   if (!checkBody(req.body, ['username', 'password'])) {
     res.json({ result: false, error: 'Missing or empty fields' });
@@ -53,6 +55,3 @@ router.post('/signin', (req, res) => {
 
 
 module.exports = router;
-module.exports = {
-  username: req.body.username
-};

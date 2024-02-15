@@ -17,10 +17,22 @@ const Signup = (props) => {
     }
     
 
-    const handleSignup = (event) => {
+    const handleSignup = async (event) => {
         event.preventDefault();
-        router.push('/home_main')
 
+        const fetching_data = await fetch('http://localhost:3000/users/signup', {
+            method: "POST", 
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({firstname: signup_firstname, username: signup_username, password: signup_password}),
+          })
+
+        const user_data = await fetching_data.json();
+
+        if(user_data.result){
+            router.push('/home_main')
+        }
     }
 
     return(

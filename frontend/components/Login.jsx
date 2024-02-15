@@ -3,7 +3,6 @@ import styles from '../styles/Login.module.css';
 import Signup from "./Signup";
 import { useState } from "react";
 import Signin from "./Signin";
-import { useRouter } from 'next/router'
 
 // import Link from 'next/link';
 

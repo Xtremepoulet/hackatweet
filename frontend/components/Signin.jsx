@@ -23,15 +23,24 @@ const Signin = (props) => {
         password: 'yaya',
     }
 
-    const handleSignin = (event) => {
+    const handleSignin = async (event) => {
         event.preventDefault();
+           
+        const fetching_data = await fetch(`http://localhost:3000/users/signin`, {
+            method: "POST", 
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({username: signin_username, password: signin_password}),
+          });
 
-        if(signin_username === fake_db.username && signin_password === fake_db.password){
+        const user_data = await fetching_data.json();
+
+        if(user_data.result){
             router.push('/home_main');
         }else {
-            console.log('tu es un charlatan')
+            console.log('not good at all')
         }
-        
     }
 
 
