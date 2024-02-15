@@ -15,7 +15,7 @@ const Signup = (props) => {
     const remove_signup_modal = () => {
         props.set_signup_modal(false);
     }
-
+    
 
     const handleSignup = (event) => {
         event.preventDefault();
