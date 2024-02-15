@@ -3,6 +3,9 @@ import styles from '../styles/Login.module.css';
 import Signup from "./Signup";
 import { useState } from "react";
 import Signin from "./Signin";
+import { useRouter } from 'next/router'
+
+// import Link from 'next/link';
 
 
 const Login = () => {
@@ -10,7 +13,7 @@ const Login = () => {
     const [signup_is_modal, setsignup_is_modal] = useState(false);
     const [signin_is_modal, setsignin_is_modal] = useState(false);
 
-
+    
     //modal gestion 
     const modal_style = {'display' : 'none'};
    
@@ -35,17 +38,12 @@ const Login = () => {
     }
 
 
-
-
-
-
     return(
         <div className={styles.login_container}>
             <div className={styles.left_login_container}>
                 <img className={styles.logo} src="logo.png" alt="twitter logo"></img>
             </div>
 
-                {/* sera supprimé */}
                 <div className={`${styles.modal}`} style={modal_style}>
                     {modal}
                 </div>
@@ -61,9 +59,9 @@ const Login = () => {
                             <button onClick={() => setsignup_is_modal(true)} className={styles.signup_button}>Sign up</button>
                             <p className={styles.p}>Already have an account?</p>
                             <button onClick={() => setsignin_is_modal(true)} className={styles.signin_button}>Sign in</button>
+                           
                         </div>
                     </div>
-                    
                 </div>
             </div>
 
