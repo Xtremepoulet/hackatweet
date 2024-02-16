@@ -39,9 +39,8 @@ router.post('/new', (req, res) => {
 });
 
 
-
 router.get('/all_tweet', async (req, res, next) => {
-    
+
     Tweet.find().then(tweet => {
         if (!tweet) {
             res.json({ result: false })
@@ -51,6 +50,18 @@ router.get('/all_tweet', async (req, res, next) => {
         }
     })
 })
+
+router.delete('/delete_tweet/:_id', (req, res) => {
+    Tweet.deleteOne({ _id: req.params._id }).then((data) => {
+        console.log(data);
+        res.json({ data });
+    }).catch(err => {
+        console.error("Error deleting tweet:", err);
+        res.status(500).json({ error: "Failed to delete tweet" });
+    });
+});
+
+
 
 
 
