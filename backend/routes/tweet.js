@@ -3,10 +3,13 @@ var express = require('express');
 var router = express.Router();
 const User = require('../models/users');
 const Tweet = require('../models/tweet');
+const Hashtag = require('../models/hashtag');
+const { hash } = require('bcrypt');
 
 
 
-router.post('/new', (req, res) => {
+
+router.post('/new',async (req, res) => {
     if (!req.body.message) {
         res.json({ result: false, error: 'Missing or empty fields' });
         return;
@@ -14,7 +17,6 @@ router.post('/new', (req, res) => {
         res.json({ result: false, error: 'fields has more than the 280 character required' });
         return;
     }
-
 
     // Check if the user has not already been registered
     User.findOne({ $and: [{ firstname: req.body.firstname }, { username: req.body.username }] }).then(user => {

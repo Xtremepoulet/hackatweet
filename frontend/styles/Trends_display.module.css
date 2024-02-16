@@ -1,0 +1,14 @@
+.hashtag {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.hashtag_p {
+    font-size: 22px;
+}
+
+.tweet_number {
+    font-size: 14px;
+    color: #5D6879;
+}

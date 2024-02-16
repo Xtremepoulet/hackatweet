@@ -3,12 +3,15 @@ import styles from '../styles/Tweet.module.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Tweet_display from './Tweet_display';
+import { update_hashtag } from "../reducers/hashtag";
 import moment from 'moment';
 
 
-const Tweet = () => {
+const Tweet = () => {   
+
+    const dispatch = useDispatch();
 
 //il faudra que je recupere les tweets ici dans un map ou alors que je les stocks dans un reducer 
     const username = useSelector((state) => state.users.value.username)
@@ -19,7 +22,7 @@ const Tweet = () => {
     const [loading_tweet, setloading_tweet] = useState([]);
     const [update_tweet, setupdate_tweet] = useState(false);
 
-
+    
 
     useEffect(() => {
         const tweet_array = [];
@@ -49,6 +52,7 @@ const Tweet = () => {
 
           const tweet_value = await fetching_data.json();
           setupdate_tweet(!update_tweet)
+          dispatch(update_hashtag());
     }   
 
 
@@ -57,7 +61,6 @@ const Tweet = () => {
         return <Tweet_display key={i} {...data} delete_tweet={delete_tweet} />
     })
     
-    console.log(loading_tweet)
     const send_tweet = async (event) => {
         
         const fetching_data = await fetch('http://localhost:3000/tweet/new', {
@@ -69,12 +72,12 @@ const Tweet = () => {
           })
           
           const tweet_data = await fetching_data.json();    
-          console.log(tweet_data)
-          
+
           settweet_value('');
           setupdate_tweet(!update_tweet);
+          dispatch(update_hashtag());
     }
-
+    
     return(
         <div className={styles.tweet_container}>
             <div className={styles.tweet_section_top}>

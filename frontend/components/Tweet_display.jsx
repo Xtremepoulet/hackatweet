@@ -13,7 +13,7 @@ const Tweet_display = (props) => {
     const username = useSelector((state) => state.users.value.username)
 
     const [like, setlike] = useState(0)
-
+    
 
     const deleting_tweet = async () => {
 
@@ -25,7 +25,6 @@ const Tweet_display = (props) => {
         }
     }
 
-
     const like_tweet = () => {
         if(like > 0){
             setlike(like - 1);
@@ -34,8 +33,6 @@ const Tweet_display = (props) => {
         }
     }
 
-
-    console.log(like)
     return(
         <div className={styles.tweet_display}>
             <div className={styles.tweet_display_top}>
@@ -52,13 +49,12 @@ const Tweet_display = (props) => {
             <p>{props.message}</p>
         </div>  
         <div className={styles.tweet_display_bottom}>
-            <FontAwesomeIcon onClick={() => like_tweet()} icon={faHeart} className={styles.heart_icon}/>
-            <p>0</p>
+            <FontAwesomeIcon onClick={() => like_tweet()} icon={faHeart} className={like > 0 ? `${styles.heart_icon_red}` : `${styles.heart_icon}`}/>
+            <p>{like}</p>
             <FontAwesomeIcon onClick={() => deleting_tweet()} className={styles.trash_icon} icon={faTrash} />
         </div>
     </div>
     );
 }
-
 
 export default Tweet_display;

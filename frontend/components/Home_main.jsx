@@ -17,7 +17,7 @@ const Home_main = () => {
 
     const username = useSelector((state) => state.users.value.username);
     const firstname = useSelector((state) => state.users.value.firstname);
-
+          
     const handleLogout = () => {
         dispatch(logout());
         router.push('/');
