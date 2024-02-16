@@ -52,15 +52,6 @@ router.get('/all_tweet', async (req, res, next) => {
     })
 })
 
-function displayCountryFromCityName(cityName) {
-    City.findOne({ name: cityName })
-        .populate('country')
-        .then(data => {
-            console.log(data);
-        });
-}
-
-
 
 
 module.exports = router;
