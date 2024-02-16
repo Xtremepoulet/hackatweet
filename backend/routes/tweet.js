@@ -51,16 +51,20 @@ router.get('/all_tweet', async (req, res, next) => {
     })
 })
 
-router.delete('/delete_tweet/:_id', (req, res) => {
-    Tweet.deleteOne({ _id: req.params._id }).then((data) => {
-        console.log(data);
-        res.json({ data });
-    }).catch(err => {
-        console.error("Error deleting tweet:", err);
-        res.status(500).json({ error: "Failed to delete tweet" });
-    });
-});
 
+
+router.post('/delete_tweet', (req, res, next)  => {
+
+    const {username, firstname, message} = req.body;
+
+    Tweet.deleteOne({ $and: [{username: username}, {firstname: firstname}, {message: message}]}).then(data => {
+        if(data.deletedCount > 0){
+            res.json({result: true, message: 'tweet deleted'});
+        }else {
+            res.json({result: false})
+        }
+    })
+})
 
 
 

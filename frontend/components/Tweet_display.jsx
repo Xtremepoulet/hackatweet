@@ -8,6 +8,12 @@ import moment from 'moment';
 
 
 const Tweet_display = (props) => {
+
+    const deleting_tweet = () => {
+        props.delete_tweet(props.username, props.firstname, props.message);
+    }
+
+
     return(
         <div className={styles.tweet_display}>
             <div className={styles.tweet_display_top}>
@@ -26,7 +32,7 @@ const Tweet_display = (props) => {
         <div className={styles.tweet_display_bottom}>
             <FontAwesomeIcon icon={faHeart} className={styles.heart_icon}/>
             <p>0</p>
-            <FontAwesomeIcon className={styles.trash_icon} icon={faTrash} />
+            <FontAwesomeIcon onClick={() => deleting_tweet()} className={styles.trash_icon} icon={faTrash} />
         </div>
     </div>
     );

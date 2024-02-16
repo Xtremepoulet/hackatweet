@@ -18,7 +18,7 @@ const Tweet = () => {
     const [loading_tweet, setloading_tweet] = useState([]);
     const [update_tweet, setupdate_tweet] = useState(false);
 
-                               
+
 
     useEffect(() => {
         const tweet_array = [];
@@ -37,10 +37,23 @@ const Tweet = () => {
 
     
 
+    const delete_tweet = async (username, firstname, message) => {
+        const fetching_data = await fetch('http://localhost:3000/tweet/delete_tweet', {
+            method: "POST", 
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({firstname: firstname, username: username, message: message}),
+          })
+
+          const tweet_value = await fetching_data.json();
+          setupdate_tweet(!update_tweet)
+    }   
+
 
 
     const displaying_all_tweet = loading_tweet.map((data, i) => {
-        return <Tweet_display key={i} {...data} />
+        return <Tweet_display key={i} {...data} delete_tweet={delete_tweet} />
     })
     
     console.log(loading_tweet)
