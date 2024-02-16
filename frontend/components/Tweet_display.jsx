@@ -1,7 +1,9 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faHeart, faTrash } from '@fortawesome/free-solid-svg-icons';
 import styles from '../styles/Tweet_display.module.css';
+import moment from 'moment';
+
 
 
 
@@ -15,7 +17,7 @@ const Tweet_display = (props) => {
                 <div className={styles.user_infos}>
                     <p>{props.firstname}</p>
                     <p className={styles.user_infos_username}>@{props.username}</p>
-                    <p className={styles.user_infos_date}>date</p>
+                    <p className={styles.user_infos_date}>{moment().startOf(props.date).fromNow()}</p>
                 </div>
             </div>
         <div className={styles.tweet_display_middle}>
@@ -24,6 +26,7 @@ const Tweet_display = (props) => {
         <div className={styles.tweet_display_bottom}>
             <FontAwesomeIcon icon={faHeart} className={styles.heart_icon}/>
             <p>0</p>
+            <FontAwesomeIcon className={styles.trash_icon} icon={faTrash} />
         </div>
     </div>
     );

@@ -5,6 +5,8 @@ import { faUser, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Tweet_display from './Tweet_display';
+import moment from 'moment';
+
 
 const Tweet = () => {
 
@@ -14,10 +16,11 @@ const Tweet = () => {
 
     const [tweet_value, settweet_value] = useState('');
     const [loading_tweet, setloading_tweet] = useState([]);
+    const [update_tweet, setupdate_tweet] = useState(false);
 
+                               
 
     useEffect(() => {
-
         const tweet_array = [];
 
         fetch('http://localhost:3000/tweet/all_tweet')
@@ -25,13 +28,15 @@ const Tweet = () => {
             .then(data => {
                 if(data.result){
                     data.tweet.forEach(tweet => {
-                        tweet_array.push({message: tweet.message, username, firstname})
+                        tweet_array.push({message: tweet.message, username: tweet.username, firstname: tweet.firstname, id: tweet._id, date: tweet.date})
                     })
-
                     setloading_tweet(tweet_array)
                 }
             })
-    }, [])
+    }, [update_tweet])
+
+    
+
 
 
     const displaying_all_tweet = loading_tweet.map((data, i) => {
@@ -53,6 +58,7 @@ const Tweet = () => {
           console.log(tweet_data)
 
           settweet_value('');
+          setupdate_tweet(!update_tweet)
     }
 
     return(
@@ -77,9 +83,9 @@ const Tweet = () => {
                             <FontAwesomeIcon className={styles.user_icon} icon={faUser} />
                         </div>
                         <div className={styles.user_infos}>
-                            <p>firstname</p>
-                            <p className={styles.user_infos_username}>@username</p>
-                            <p className={styles.user_infos_date}>date</p>
+                            <p>DickLover</p>
+                            <p className={styles.user_infos_username}>@dickman</p>
+                            <p className={styles.user_infos_date}>{moment().startOf("month").fromNow()}</p>
                         </div>
                     </div>
                     <div className={styles.tweet_display_middle}>
