@@ -1,0 +1,55 @@
+
+.tweet_display {
+    padding: 10px 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    max-height: 180px;
+    color: white;
+    border-bottom: 0.1px solid white;
+}
+
+.tweet_display_top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.user_infos {
+    display: flex;
+    gap: 5px;
+    color: white;
+}
+
+
+.heart_icon {
+    color: white;
+    cursor: pointer;
+}
+
+
+.tweet_display_bottom {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user_infos_username {
+    color: #354355;
+}
+
+.user_infos_date {
+    color: #354355;
+}
+
+.user_icon {
+    padding: 10px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: thin solid #161D28;
+    color: white;
+    background-color: #298AD0;
+    cursor: pointer;
+}

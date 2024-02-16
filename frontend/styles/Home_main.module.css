@@ -4,6 +4,7 @@
     display: flex;
 }
 
+                      
 
 .left_section {
     display: flex;
@@ -75,7 +76,16 @@
     display: flex;
     background-color: #161D28;
     border-right: 0.1px solid white;
+    overflow-y: scroll;
+    overscroll-behavior-y: scroll;
 }
+
+/* dont display the scroll  */
+.mid_section::-webkit-scrollbar {
+    display: none;
+}
+
+
 
 
 

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import Tweet_display from './Tweet_display';
 
 const Tweet = () => {
 
@@ -14,18 +15,28 @@ const Tweet = () => {
     const [tweet_value, settweet_value] = useState('');
     const [loading_tweet, setloading_tweet] = useState([]);
 
-    // useEffect(() => {
-    //     fetch('http://localhost:3000/tweet/all_tweet')
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             if(data.result){
-    //                 data.tweet.forEach(tweet => {
-    //                     console.log(tweet)
-    //                     setloading_tweet([...loading_tweet, {message: tweet.message, username, firstname}])
-    //                 })
-    //             }
-    //         })
-    // }, [])
+
+    useEffect(() => {
+
+        const tweet_array = [];
+
+        fetch('http://localhost:3000/tweet/all_tweet')
+            .then(response => response.json())
+            .then(data => {
+                if(data.result){
+                    data.tweet.forEach(tweet => {
+                        tweet_array.push({message: tweet.message, username, firstname})
+                    })
+
+                    setloading_tweet(tweet_array)
+                }
+            })
+    }, [])
+
+
+    const displaying_all_tweet = loading_tweet.map((data, i) => {
+        return <Tweet_display key={i} {...data} />
+    })
     
     console.log(loading_tweet)
     const send_tweet = async (event) => {
@@ -35,10 +46,11 @@ const Tweet = () => {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({username: username, message: tweet_value}),
+            body: JSON.stringify({firstname: firstname, username: username, message: tweet_value}),
           })
           
           const tweet_data = await fetching_data.json();    
+          console.log(tweet_data)
 
           settweet_value('');
     }
@@ -78,6 +90,8 @@ const Tweet = () => {
                         <p>0</p>
                     </div>
                 </div>
+                {displaying_all_tweet}
+                
             </div>
         </div>
     )

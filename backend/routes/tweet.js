@@ -31,7 +31,7 @@ router.post('/new', (req, res) => {
             })
 
             newTweet.save().then(() => {
-                res.json({ result: true, error: 'Tweet created' });
+                res.json({ result: true, message: 'Tweet created' });
 
             })
         }
@@ -41,7 +41,7 @@ router.post('/new', (req, res) => {
 
 
 router.get('/all_tweet', async (req, res, next) => {
-
+    
     Tweet.find().then(tweet => {
         if (!tweet) {
             res.json({ result: false })
