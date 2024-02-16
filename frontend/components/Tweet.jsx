@@ -13,6 +13,7 @@ const Tweet = () => {
 //il faudra que je recupere les tweets ici dans un map ou alors que je les stocks dans un reducer 
     const username = useSelector((state) => state.users.value.username)
     const firstname = useSelector((state) => state.users.value.firstname)
+    const token = useSelector((state) => state.users.value.token)
 
     const [tweet_value, settweet_value] = useState('');
     const [loading_tweet, setloading_tweet] = useState([]);
@@ -37,13 +38,13 @@ const Tweet = () => {
 
     
 
-    const delete_tweet = async (username, firstname, message) => {
+    const delete_tweet = async (username, firstname, message, token) => {
         const fetching_data = await fetch('http://localhost:3000/tweet/delete_tweet', {
             method: "POST", 
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({firstname: firstname, username: username, message: message}),
+            body: JSON.stringify({firstname: firstname, username: username, message: message, token: token}),
           })
 
           const tweet_value = await fetching_data.json();
@@ -64,14 +65,14 @@ const Tweet = () => {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({firstname: firstname, username: username, message: tweet_value}),
+            body: JSON.stringify({firstname: firstname, username: username, message: tweet_value, token: token}),
           })
           
           const tweet_data = await fetching_data.json();    
           console.log(tweet_data)
-
+          
           settweet_value('');
-          setupdate_tweet(!update_tweet)
+          setupdate_tweet(!update_tweet);
     }
 
     return(

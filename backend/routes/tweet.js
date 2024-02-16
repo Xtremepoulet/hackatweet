@@ -15,6 +15,7 @@ router.post('/new', (req, res) => {
         return;
     }
 
+
     // Check if the user has not already been registered
     User.findOne({ $and: [{ firstname: req.body.firstname }, { username: req.body.username }] }).then(user => {
         if (!user) {
@@ -26,6 +27,7 @@ router.post('/new', (req, res) => {
                 username: req.body.username,
                 user: user._id,
                 date: new Date(),
+                token: req.body.token,
                 message: req.body.message,
                 likeCount: 0,
             })
@@ -55,15 +57,15 @@ router.get('/all_tweet', async (req, res, next) => {
 
 router.post('/delete_tweet', (req, res, next)  => {
 
-    const {username, firstname, message} = req.body;
+    const {username, firstname, message, token} = req.body;
 
-    Tweet.deleteOne({ $and: [{username: username}, {firstname: firstname}, {message: message}]}).then(data => {
-        if(data.deletedCount > 0){
-            res.json({result: true, message: 'tweet deleted'});
-        }else {
-            res.json({result: false})
-        }
-    })
+        Tweet.deleteOne({ $and: [{username: username}, {firstname: firstname}, {message: message}, {token: token}]}).then(data => {
+            if(data.deletedCount > 0){
+                res.json({result: true, message: 'tweet deleted'});
+            }else {
+                res.json({result: false})
+            }
+        })
 })
 
 
