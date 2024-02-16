@@ -12,7 +12,7 @@ router.post('/signup', (req, res) => {
     res.json({ result: false, error: 'Missing or empty fields' });
     return;
   }
-
+  
   // Check if the user has not already been registered
   //i need to compare password hash to see if he already is in the database
   User.findOne({username: req.body.username}).then(user => {

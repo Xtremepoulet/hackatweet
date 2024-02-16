@@ -8,7 +8,6 @@ const usersSchema = mongoose.Schema({
     token: String, 
 })
 
-
 const User = mongoose.model('users', usersSchema);
 
 module.exports = User;

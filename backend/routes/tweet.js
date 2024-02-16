@@ -36,5 +36,19 @@ router.post('/new', (req, res) => {
     });
 });
 
+                    
+
+router.get('/all_tweet', async (req, res, next) => {
+
+    Tweet.find().then(tweet => {
+        if(!tweet){
+            res.json({result: false})
+            return;
+        }else {
+            res.json({result: true, tweet})
+        }
+    })
+})
+
 
 module.exports = router;
