@@ -16,12 +16,14 @@ router.post('/new', (req, res) => {
     }
 
     // Check if the user has not already been registered
-    User.findOne({ username: req.body.username }).then(user => {
+    User.findOne({ $and: [{ firstname: req.body.firstname }, { username: req.body.username }] }).then(user => {
         if (!user) {
             res.json({ result: false, error: "User not found" })
         } else {
             // User already exists in database
             const newTweet = new Tweet({
+                firstname: req.body.firstname,
+                username: req.body.username,
                 user: user._id,
                 date: new Date(),
                 message: req.body.message,
@@ -36,19 +38,29 @@ router.post('/new', (req, res) => {
     });
 });
 
-                    
+
 
 router.get('/all_tweet', async (req, res, next) => {
 
     Tweet.find().then(tweet => {
-        if(!tweet){
-            res.json({result: false})
+        if (!tweet) {
+            res.json({ result: false })
             return;
-        }else {
-            res.json({result: true, tweet})
+        } else {
+            res.json({ result: true, tweet })
         }
     })
 })
+
+function displayCountryFromCityName(cityName) {
+    City.findOne({ name: cityName })
+        .populate('country')
+        .then(data => {
+            console.log(data);
+        });
+}
+
+
 
 
 module.exports = router;
