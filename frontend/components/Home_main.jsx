@@ -6,6 +6,7 @@ import Tweet from "./Tweet";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../reducers/users";
 import { useRouter } from 'next/router';
+import Trends from "./Trends";
 
                                     
 
@@ -50,7 +51,7 @@ const Home_main = () => {
 
             {/* right section */}
             <div className={styles.right_section}>
-
+                <Trends />
             </div>
 
 

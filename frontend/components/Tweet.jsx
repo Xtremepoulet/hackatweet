@@ -41,8 +41,6 @@ const Tweet = () => {
           const tweet_data = await fetching_data.json();    
 
           settweet_value('');
-       
-          
     }
 
     return(
@@ -52,7 +50,7 @@ const Tweet = () => {
                     <p>Home</p>
                 </div>
                 <div className={styles.tweet_writing}>   
-                    <textarea onChange={(e) => settweet_value(e.target.value)} name="" id="" cols="40" rows="1"></textarea>
+                    <textarea onChange={(e) => settweet_value(e.target.value)} value={tweet_value} name="" id="" cols="40" rows="1"></textarea>
                 </div>
                 <div className={styles.send_tweet}>
                     <p>{tweet_value.length}/280</p>

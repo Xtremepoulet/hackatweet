@@ -1,0 +1,44 @@
+.trends_container {
+    height: 100%;
+    color: white;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.trends_title {
+    font-size: 22px;
+}
+
+.trends_display_container {
+    background-color: #19222E;
+    border-radius: 10px;
+    width: 100%;
+    max-height: 100%;
+    padding: 10px;
+}
+
+.trending {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    height: 100%;
+    gap: 40px;
+}
+
+.hashtag {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.hashtag_p {
+    font-size: 22px;
+}
+
+.tweet_number {
+    font-size: 14px;
+    color: #5D6879;
+}
