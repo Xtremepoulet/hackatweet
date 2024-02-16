@@ -26,6 +26,15 @@
 .heart_icon {
     color: white;
     cursor: pointer;
+    width: 15px;
+    height: 15px;
+}
+
+.trash_icon {
+    color: white;
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
 }
 
 

@@ -13,11 +13,17 @@
     gap: 7px;
     border-bottom: 0.1px solid white;
 }
-
+    
 .tweet_section_bottom {
         height: 80%;
         background-color: #161D28;
+        overflow-y: scroll;
 }
+
+.tweet_section_bottom::-webkit-scrollbar {
+    display: none;
+}
+
 
 .tweet_section > p {
     font-size: 22px;
